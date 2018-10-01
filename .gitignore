@@ -1,2 +1,14 @@
 # phpstorm project files
 .idea
+
+# macOS files
+_mac
+
+# Codeception
+codecept.phar
+codeception.yml
+codeception.*
+
+# apache logs
+error.log
+custom.log
