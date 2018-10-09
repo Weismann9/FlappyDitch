@@ -1,3 +1,5 @@
+var res = 0;
+var link = null;
 class GameScene extends Phaser.Scene {
     constructor() {
         super({key: 'game'});
@@ -10,6 +12,7 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
+        link=this;
         this.add.image(400, 300, 'sky');
         this.bird = this.physics.add.image(game.config.width / 2, game.config.height / 2, 'bird');
         this.bird.body.gravity.y = gameOptions.playerGravity;
@@ -18,13 +21,16 @@ class GameScene extends Phaser.Scene {
         this.key_jump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         this.score = 0;
-        this.labelScore = this.add.text(20, 20, "0",
-            { font: "30px Arial", fill: "#ffffff" });
+        this.labelScore = this.add.text(20, 20, "score: 0",
+          { font: "30px Arial", fill: "#ffffff" });
+
+        if(if_user)this.labelBestScore = this.add.text(20, 60, "0",
+          { font: "30px Arial", fill: "#ffffff" });
 
         this.labelScore.setScrollFactor(0);
 
         this.pipes = this.add.group();
-        this.physics.add.overlap(this.bird, this.pipes, this.restartGame, null, this);
+        this.physics.add.overlap(this.bird, this.pipes, this.save_scores, null, this);
 
         // this.cameras.main.startFollow(this.bird);
         this.time.addEvent({
@@ -36,15 +42,26 @@ class GameScene extends Phaser.Scene {
     }
 
     update() {
+        if(if_user) this.best_score();
         if (this.key_jump.isDown) {
             this.bird.setVelocityY(-gameOptions.playerJump);
         }
 
         if (this.bird.y < 0 || this.bird.y > 600) {
-            this.restartGame();
+         this.save_scores();
+     //       this.restartGame();
         }
 
         if (this.key_esc.isDown) {
+            if(if_user){
+                destroy();
+            $(document).ready(function(){
+            $.ajax({
+                url:"php/destroy.php",
+                success: function(output){
+                    }
+                });
+            });}
             this.scene.start('menu');
             console.log('key_esc');
             this.key_esc.isDown = false;
@@ -52,6 +69,7 @@ class GameScene extends Phaser.Scene {
     }
 
     restartGame(){
+        res=0;
         this.scene.start('game');
     }
 
@@ -65,7 +83,8 @@ class GameScene extends Phaser.Scene {
     }
 
     addRowOfPipes() {
-        this.labelScore.text = this.score;
+        res = this.score;
+        this.labelScore.text = "score: "+this.score;
         var hole = Math.floor(Math.random() * 5) + 1;
         for (var i = 0; i < 9; i++) {
             if (i !== hole && i !== hole + 1) {
@@ -73,6 +92,44 @@ class GameScene extends Phaser.Scene {
             }
         }
         this.score += 1;
+    }
+
+    save_scores()
+    {
+        if(if_user){
+        $(document).ready(function(){
+            var _score = res;
+            var _usid = user_id();
+            var _data = '_score='+_score+'&_usid='+_usid;
+          //  console.log(_data);
+            $.ajax({
+                type: "POST",
+                url:"php/save_score.php",
+                data: _data,
+                success: function(output){
+                    }
+                });
+            });
+        }
+        this.restartGame();
+    }
+    best_score()
+    {
+        if(if_user){
+        $(document).ready(function(){
+            var _usid = user_id();
+            var _data = '_usid='+_usid;
+            //console.log(_data);
+            $.ajax({
+                type: "POST",
+                url:"php/best_score.php",
+                data: _data,
+                success: function(output){
+                link.labelBestScore.text = "best: "+output;
+                    }
+                });
+            });
+        }
     }
 }
 

@@ -150,7 +150,7 @@ class AuthorizationScene extends Phaser.Scene {
                       //      link.us_name.innerHTML=_login;
                             add_user(output,_login);
                             link.del_all();
-                            alert(output);
+                  //          alert(output);
                             link.scene.start('user');
                         }
     				}
