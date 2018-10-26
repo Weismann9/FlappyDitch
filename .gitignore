@@ -12,3 +12,6 @@ codeception.*
 # apache logs
 error.log
 custom.log
+
+php/db_config.php
+db_config.php

@@ -1,20 +1,10 @@
-<?php 
-$data = new mysqli('localhost','root','','FlappyDitch');
-if (mysqli_connect_errno())	exit();
+<?php
+require_once 'db_connection.php';
 
-$_score = $_POST['_score'];
-$_usid = $_POST['_usid'];
-$answer="new";
+$userId = $_POST['userId'];
+$score = $_POST['bestScore'];
 
-$sql="SELECT * FROM scores WHERE ((Score > '$_score') AND (UserId = '$_usid'))";
-		$check = $data->query($sql);
-		$count_row=$check->num_rows;
-		if ($count_row==0)
-		{
-			$sql1="INSERT INTO scores SET Score = '$_score', UserId = '$_usid'";
-			$result = mysqli_query($data, $sql1) or die (mysqli_connect_errno()."Помилка запису");
-			return $result;
-		}
-		else $answer = "not new";	
-echo $answer;
+$query = "UPDATE User SET Score = $score WHERE Id=$userId";
+$result = mysqli_query($db, $query) or die (mysqli_connect_errno() . " Writing error: UserId - $userId, Score - $score.");
+
 ?>
