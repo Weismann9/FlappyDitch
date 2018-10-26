@@ -24,11 +24,12 @@ require_once 'php/db_connection.php';
 <header>
     <a href="index.php">Menu</a>
 </header>
-<h3>
-    Welcome <?= '(' . $_SESSION['id'] . ')' . $_SESSION['login'] ?>
-</h3>
+
 <div>
     <?php if (isset($_SESSION['id'])): ?>
+        <h3>
+            Welcome <?= '(' . $_SESSION['id'] . ')' . $_SESSION['login'] ?>
+        </h3>
         <a class="btn btn-block btn-success" href="play.php">Play</a>
         <a class="btn btn-block btn-warning" href="scoreboard.php">Scoreboard</a>
         <a class="btn btn-block btn-warning" href="skins.php">Skins</a>

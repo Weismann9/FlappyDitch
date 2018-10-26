@@ -27,12 +27,10 @@ require_once 'php/db_connection.php';
     <a href="index.php">Menu</a>
 </header>
 <!--<script type="text/javascript" src="classes/ClassUser.js"></script>-->
-<script type="text/javascript" src="scripts/jquery.js"></script>
-<script type="text/javascript" src="scripts/phaser.js"></script>
+<script type="text/javascript" src="vendor/jquery.js"></script>
+<script type="text/javascript" src="vendor/phaser.js"></script>
 <script type="text/javascript" src="scenes/MenuScene.js"></script>
 <script type="text/javascript" src="scenes/GameScene.js"></script>
-<script type="text/javascript" src="scenes/UserScene.js"></script>
-<script type="text/javascript" src="scenes/AuthorizationScene.js"></script>
 <script type="text/javascript" src="scripts/main.js"></script>
 <?php if (isset($_SESSION['id'])):
     // BestScore always updates, but this value is used as initial.
