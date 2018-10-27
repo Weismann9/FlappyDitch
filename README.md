@@ -11,7 +11,7 @@ A silly project which implements a flappy game.
 
 #### Database configuration:
 Configure your database connection in file /php/db_config.php\
-Use /php/db_config[Template].php as a template.
+Use /php/[Template]db_config.php as a template.
 ```
 define('DB_SERVER', 'localhost:8889');
 define('DB_USERNAME', 'root');
