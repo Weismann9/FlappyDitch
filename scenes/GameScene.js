@@ -128,7 +128,7 @@ class GameScene extends Phaser.Scene {
     }
 
     gameOver() {
-        this.saveBestScore();
+        if (!this.userIsGuest) this.saveBestScore();
         this.restartGame();
     }
 
