@@ -22,6 +22,20 @@ header > a {
     text-decoration: none;
     transition: .35s;
 }
+.main-menu-div > a:hover{
+
+}
+
+.main-menu-div{
+    opacity: 0.9;
+    margin-top: 11%;
+    padding: 25px;
+    border-radius: 25px !important;
+    border-style: hidden;
+    font-family: 'Lobster', cursive;
+}
+
+
 
 header > a:hover {
     display: block;
