@@ -109,20 +109,22 @@ class GameScene extends Phaser.Scene {
     }
 
     saveBestScore() {
-        let score = this.score,
-            userId = this.user.id;
-        $.ajax({
-            type: "POST",
-            url: "php/save_score.php",
-            data: {
-                userId: userId,
-                bestScore: score,
-            },
-            success: function () {
-                console.log(`Score: ${score}, User(id): ${userId}, Saved!`);
-            }
-        });
-        this.user.bestScore = this.score;
+        if (this.user.bestScore < this.score) {
+            let score = this.score,
+                userId = this.user.id;
+            $.ajax({
+                type: "POST",
+                url: "php/save_score.php",
+                data: {
+                    userId: userId,
+                    bestScore: score,
+                },
+                success: function () {
+                    console.log(`Score: ${score}, User(id): ${userId}, Saved!`);
+                }
+            });
+            this.user.bestScore = this.score;
+        }
     }
 
     gameOver() {
