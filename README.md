@@ -1,7 +1,7 @@
 ## FlappyDitch
 A silly project which implements a flappy game.
 
-###Project structure
+### Project structure
 
 - /assets — basic game assets for Phaser
 - /php — assisting php scripts
@@ -9,7 +9,7 @@ A silly project which implements a flappy game.
 - /scripts — javaScript files
 - /vendors — javaScript libraries
 
-####Database configuration:
+#### Database configuration:
 Configure your database connection in file /php/db_config.php\
 Use /php/db_config[Template].php as a template.
 ```
