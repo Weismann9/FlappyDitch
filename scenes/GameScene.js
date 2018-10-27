@@ -1,11 +1,9 @@
-var res = 0;
-var link = null;
-
 class User {
-    constructor(id, name, bestScore) {
+    constructor(id, name, bestScore, skin) {
         this.id = id;
         this.name = name;
         this.bestScore = bestScore;
+        this.skin = skin;
     }
 }
 
@@ -21,20 +19,20 @@ class GameScene extends Phaser.Scene {
         if (!this.userIsGuest) {
             let userId = parseInt(document.getElementById('user-id').value),
                 userName = document.getElementById('user-login').value,
-                userBestScore = document.getElementById('user-bs').value;
-            this.user = new User(userId, userName, userBestScore);
+                userBestScore = document.getElementById('user-bs').value,
+                userSkin = document.getElementById('user-skin').value;
+            this.user = new User(userId, userName, userBestScore, userSkin);
         }
-
+        this.userSkin = (!this.userIsGuest) ? this.user.skin : 'default';
     }
 
     preload() {
         this.load.image('sky', 'assets/sky.png');
-        this.load.image('bird', 'assets/bird.png');
+        this.load.image('bird', `assets/characters/${this.userSkin}.png`);
         this.load.image('pipe', 'assets/pipe.png');
     }
 
     create() {
-        link = this;
         this.add.image(400, 300, 'sky');
         this.bird = this.physics.add.image(game.config.width / 2, game.config.height / 2, 'bird');
         this.bird.body.gravity.y = gameOptions.playerGravity;
@@ -55,7 +53,9 @@ class GameScene extends Phaser.Scene {
         this.pipes = this.add.group();
         this.physics.add.overlap(this.bird, this.pipes, this.gameOver, null, this);
 
+        // Make camera track the player.
         // this.cameras.main.startFollow(this.bird);
+
         this.time.addEvent({
             delay: 2000,
             callback: this.addRowOfPipes,
@@ -71,7 +71,7 @@ class GameScene extends Phaser.Scene {
         }
 
         if (this.bird.y < 0 || this.bird.y > 600) {
-            this.saveBestScore();
+            if (!this.userIsGuest) this.saveBestScore();
             this.restartGame();
         }
 
@@ -82,10 +82,9 @@ class GameScene extends Phaser.Scene {
 
     restartGame() {
         //this.scene.start('game');
-        /***
-         * Instead of reloading the scene internally we reload the whole page.
-         * In such way best score can update from database.
-         */
+
+        //Instead of reloading the scene internally we reload the whole page.
+        //In such way best score can update from database.
         document.location.reload(false);
     }
 

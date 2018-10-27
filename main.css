@@ -35,3 +35,9 @@ header > a:hover {
 #user-data{
     display: none;
 }
+
+.char-preview{
+    height: 50px;
+    width: 50px;
+    background-size: contain;
+}

@@ -1,9 +1,9 @@
-var gameOptions = {
+let gameOptions = {
     playerGravity: 200,
     playerJump: 200,
 };
 
-var config = {
+let config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
@@ -17,4 +17,4 @@ var config = {
     scene: [MenuScene, GameScene]
 };
 
-var game = new Phaser.Game(config);
+let game = new Phaser.Game(config);
