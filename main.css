@@ -28,8 +28,9 @@ header > a {
 
 .main-menu-div{
     opacity: 0.9;
-    margin-top: 11%;
     padding: 25px;
+    margin-top: 26vh;
+    margin-bottom: 24vh;
     border-radius: 25px !important;
     border-style: hidden;
     font-family: "Lobster";
