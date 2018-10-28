@@ -32,10 +32,15 @@ header > a {
     padding: 25px;
     border-radius: 25px !important;
     border-style: hidden;
-    font-family: 'Lobster', cursive;
+    font-family: "Lobster";
+    color:white;
 }
-
-
+.input_text{
+    font-family: Arial;
+}
+.log_input{
+    color: white;
+}
 
 header > a:hover {
     display: block;
@@ -51,7 +56,10 @@ header > a:hover {
 }
 
 .char-preview{
-    height: 50px;
-    width: 50px;
+    height: 100px;
+    width: 100px;
     background-size: contain;
+}
+.highlight{
+    background-color: white;
 }

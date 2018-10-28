@@ -33,18 +33,22 @@ if (isset($_POST['login-btn'])) {
     <script src="/vendor/jquery-3.3.1.slim.min.js"></script>
     <script src="/vendor/popper.min.js"></script>
     <script src="/vendor/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="/vendor/jquery.backgroundvideo.min.js"></script>
+    <script src="/vendor/background_video_settings.js"></script>
 </head>
-<body>
+<body style="background-color: #818182">
 <header>
-    <a href="index.php">Menu</a>
+    <a href="index.php" style="font-family: Lobster"><?= APP_NAME ?></a>
 </header>
 <div>
-    <form method="post">
-        <label>Username</label>
-        <input name="username" type="text">
-        <label>Password</label>
-        <input name="password" type="text">
-        <input name="login-btn" type="submit" value="Login" class="btn btn-success">
+    <form class="container main-menu-div col-4 bg-dark border border-white" method="post">
+        <label class="btn-block">Username</label>
+        <input class="btn-block input_text" name="username" type="text">
+        <label class="btn-block">Password</label>
+        <input class="btn-block input_text" name="password" type="password">
+        <input name="login-btn" type="submit" value="Login" class="btn-block btn btn-success">
+        <label class="btn-block">You do not have an account? <a href="signup.php">Sing up</a></label>
     </form>
     <?php if ($alert == ALERT_ERROR): ?>
         <h6 class="alert alert-danger">

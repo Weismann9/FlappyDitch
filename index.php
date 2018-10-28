@@ -15,33 +15,19 @@ require_once 'php/db_connection.php';
     <script src="/vendor/jquery.backgroundvideo.min.js"></script>
     <script src="/vendor/popper.min.js"></script>
     <script src="/vendor/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            var videobackground = new $.backgroundVideo($('body'), {
-                "align": "centerXY",
-                "width": 1280,
-                "height": 720,
-                "path": "assets/",
-                "filename": "gameplay",
-                "types": ["mp4","ogg","webm"],
-                "preload": true,
-                "autoplay": true,
-                "loop": true
-            });
-        });
-    </script>
+    <script src="/vendor/background_video_settings.js"></script>
 </head>
-<body>
+<body style="background-color: #818182">
 <header>
-    <a href="index.php">Menu</a>
+    <a href="index.php" style="font-family: Lobster"><?= APP_NAME ?></a>
 </header>
 
 <div>
     <?php if (isset($_SESSION['id'])): ?>
-        <h3>
+        <div class="container main-menu-div col-4 bg-dark border border-white">
+        <h3 style="text-align: center">
             Welcome <?= '(' . $_SESSION['id'] . ')' . $_SESSION['login'] ?>
         </h3>
-    <div class="container main-menu-div col-4 bg-dark border border-white">
         <a class="btn btn-block btn-success" href="play.php">Play</a>
         <a class="btn btn-block btn-warning" href="scoreboard.php">Scoreboard</a>
         <a class="btn btn-block btn-warning" href="skins.php">Skins</a>

@@ -13,23 +13,33 @@ require_once 'php/db_connection.php';
     <script src="/vendor/popper.min.js"></script>
     <script src="/vendor/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="background-color: #818182; color: white" >
 <header>
-    <a href="index.php">Menu</a>
+    <a href="index.php" style="font-family: Lobster"><?= APP_NAME ?></a>
 </header>
-<table>
+<table class="table table-bordered table-hover">
+    <thead class="thead-default">
     <tr>
-        <th>Player</th>
-        <th>Best Score</th>
+        <th scope="row">Player</th>
+        <th scope="row">Best Score</th>
     </tr>
+    </thead>
     <?php
     $query = "SELECT username, score FROM User ORDER BY score DESC";
     $result = mysqli_query($db, $query);
+    $next=false;
     while ($users = mysqli_fetch_array($result, MYSQLI_ASSOC)): ?>
         <!--Bodgan, kogda budesh jeboshit, sdelai chtob score current usera videlyalsa in table-->
         <tr>
             <?php foreach ($users as $key => $value): ?>
-                <td><?= $value ?></td>
+            <?php if ($value==$_SESSION['login']): $next=true; ?>
+                <td style="color: red"><?= $value ?></td>
+                <?php else:?>
+                    <?php if ($next==false): ?>
+                    <td><?= $value ?></td>
+                    <?php else: $next=false ?> <td style="color: red"><?= $value ?></td>
+                    <? endif; ?>
+                <?endif;?>
             <?php endforeach; ?>
         </tr>
     <?php endwhile; ?>

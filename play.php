@@ -14,9 +14,9 @@ require_once 'php/db_connection.php';
     <script src="/vendor/popper.min.js"></script>
     <script src="/vendor/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="background-color: black; text-align: center">
 <header>
-    <a href="index.php">Menu</a>
+    <a href="index.php" style="font-family: Lobster"><?= APP_NAME ?></a>
 </header>
 <script type="text/javascript" src="vendor/jquery.js"></script>
 <script type="text/javascript" src="vendor/phaser.js"></script>
