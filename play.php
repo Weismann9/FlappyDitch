@@ -7,6 +7,7 @@ require_once 'php/db_connection.php';
 <head>
     <meta charset="UTF-8">
     <title><?= APP_NAME ?></title>
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/vendor/bootstrap.min.css">

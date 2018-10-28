@@ -13,6 +13,7 @@ if (isset($_POST['skin-btn'])) {
 
 <head>
     <title><?= APP_NAME ?></title>
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/vendor/bootstrap.min.css">
@@ -63,6 +64,8 @@ $currentSkin = mysqli_fetch_array($result, MYSQLI_ASSOC)['skin'];
     var selectedTd;
     var table = document.getElementById('skins_table');
     let selector = document.getElementById('skin-selector');
+    selector.options.selectedIndex = <?= array_search($currentSkin . '.png', $characters) ?>;
+    highlight(table.rows[selector.options.selectedIndex+1].cells[0]);
     table.onclick = function(event) {
         var target = event.target;
         let row = event.target;
@@ -71,8 +74,8 @@ $currentSkin = mysqli_fetch_array($result, MYSQLI_ASSOC)['skin'];
         highlight(target);
     };
     selector.onchange = function(event){
+        highlight(table.rows[selector.options.selectedIndex+1].cells[0]);
 
-    highlight(table.rows[selector.options.selectedIndex+1].cells[0]);
     };
     function highlight(node) {
         if (selectedTd) {
@@ -81,8 +84,6 @@ $currentSkin = mysqli_fetch_array($result, MYSQLI_ASSOC)['skin'];
         selectedTd = node;
         selectedTd.classList.add('highlight');
     }
-</script>
-<script>
-    selector = document.getElementById('skin-selector');
-    selector.options.selectedIndex = <?= array_search($currentSkin . '.png', $characters) ?>;
+
+
 </script>

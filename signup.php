@@ -22,6 +22,7 @@ if (isset($_POST['signup-btn'])) {
 
 <head>
     <title><?= APP_NAME ?></title>
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/vendor/bootstrap.min.css">

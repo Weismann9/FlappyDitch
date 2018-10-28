@@ -6,6 +6,7 @@ require_once 'php/db_connection.php';
 
 <head>
     <title><?= APP_NAME ?></title>
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/vendor/bootstrap.min.css">
@@ -31,16 +32,17 @@ require_once 'php/db_connection.php';
     while ($users = mysqli_fetch_array($result, MYSQLI_ASSOC)): ?>
         <!--Bodgan, kogda budesh jeboshit, sdelai chtob score current usera videlyalsa in table-->
         <tr>
-            <?php foreach ($users as $key => $value): ?>
-            <?php if ($value==$_SESSION['login']): $next=true; ?>
-                <td style="color: red"><?= $value ?></td>
-                <?php else:?>
-                    <?php if ($next==false): ?>
-                    <td><?= $value ?></td>
-                    <?php else: $next=false ?> <td style="color: red"><?= $value ?></td>
-                    <? endif; ?>
-                <?endif;?>
-            <?php endforeach; ?>
+            <?php foreach ($users as $key => $value):
+                if ($value==$_SESSION['login']): $next=true; ?>
+                    <td style="color: red"><?= $value ?></td>
+                <?php else:
+                    if ($next==false): ?>
+                        <td><?= $value ?></td>
+                    <?php else: $next=false ?>
+                        <td style="color: red"><?= $value ?></td>
+                    <?php endif;
+                endif;
+            endforeach; ?>
         </tr>
     <?php endwhile; ?>
 </table>

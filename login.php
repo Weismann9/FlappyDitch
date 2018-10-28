@@ -28,6 +28,7 @@ if (isset($_POST['login-btn'])) {
 <head>
     <title><?= APP_NAME ?></title>
     <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/vendor/bootstrap.min.css">
     <script src="/vendor/jquery-3.3.1.slim.min.js"></script>
