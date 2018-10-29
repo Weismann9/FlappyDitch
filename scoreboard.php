@@ -14,32 +14,23 @@ require_once 'src/project_init.php';
 <header>
     <a href="index.php" style="font-family: Lobster"><?= APP_NAME ?></a>
 </header>
-<table class="table table-bordered table-hover">
-    <thead class="thead-default">
-    <tr>
-        <th scope="row">Player</th>
-        <th scope="row">Best Score</th>
-    </tr>
-    </thead>
-    <?php
-    $query = "SELECT username, score FROM User ORDER BY score DESC";
-    $result = mysqli_query($db, $query);
-    $next = false;
-    while ($users = mysqli_fetch_array($result, MYSQLI_ASSOC)): ?>
-        <!--Bodgan, kogda budesh jeboshit, sdelai chtob score current usera videlyalsa in table-->
+<div class="container">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
         <tr>
-            <?php foreach ($users as $key => $value):
-                if ($value == $_SESSION['login']): $next = true; ?>
-                    <td style="color: red"><?= $value ?></td>
-                <?php else:
-                    if ($next == false): ?>
-                        <td><?= $value ?></td>
-                    <?php else: $next = false ?>
-                        <td style="color: red"><?= $value ?></td>
-                    <?php endif;
-                endif;
-            endforeach; ?>
+            <th scope="row">Player</th>
+            <th scope="row">Best Score</th>
         </tr>
-    <?php endwhile; ?>
-</table>
+        </thead>
+        <?php
+        $query = "SELECT username, score FROM User ORDER BY score DESC";
+        $result = mysqli_query($db, $query);
+        while ($users = mysqli_fetch_array($result, MYSQLI_ASSOC)):?>
+            <tr class="<?= ($users['username'] == $_SESSION['login']) ? 'bg-danger' : '' ?>">
+                <td><?= $users['username'] ?></td>
+                <td><?= $users['score'] ?></td>
+            </tr>
+        <?php endwhile; ?>
+    </table>
+</div>
 </body>

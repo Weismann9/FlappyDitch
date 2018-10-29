@@ -22,11 +22,8 @@ header > a {
     text-decoration: none;
     transition: .35s;
 }
-.main-menu-div > a:hover{
 
-}
-
-.main-menu-div{
+.main-menu-div {
     opacity: 0.9;
     padding: 25px;
     margin-top: 26vh;
@@ -34,12 +31,14 @@ header > a {
     border-radius: 25px !important;
     border-style: hidden;
     font-family: "Lobster";
-    color:white;
+    color: white;
 }
-.input_text{
+
+.input_text {
     font-family: Arial;
 }
-.log_input{
+
+.log_input {
     color: white;
 }
 
@@ -51,11 +50,12 @@ header > a:hover {
     transition: .35s;
 }
 
-.char-preview{
+.char-preview {
     height: 100px;
     width: 100px;
     background-size: contain;
 }
-.highlight{
+
+.highlight {
     background-color: white;
 }
