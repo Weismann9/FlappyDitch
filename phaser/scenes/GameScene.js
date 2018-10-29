@@ -32,12 +32,14 @@ class GameScene extends Phaser.Scene {
         this.load.image('pipe', 'assets/media/pipe.png');
         this.load.image('pipe_top_edge', 'assets/media/pipe_top_edge.png');
         this.load.image('pipe_bottom_edge', 'assets/media/pipe_bottom_edge.png');
+        this.load.audio('jump', 'assets/media/jump.wav');
     }
 
     create() {
         this.add.image(this.game.config.width / 2, this.game.config.height / 2, 'sky');
-        this.bird = this.physics.add.image(this.game.config.width / 2, this.game.config.height / 2, 'bird');
+        this.bird = this.physics.add.image(this.game.config.width / 2, this.game.config.height / 2, 'bird').setOrigin(0.1, 0.5);
         this.bird.body.gravity.y = gameOptions.playerGravity;
+        this.jump_sound = this.sound.add('jump');
 
         this.key_esc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
         this.key_jump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -68,8 +70,18 @@ class GameScene extends Phaser.Scene {
 
     update() {
 
+        if (this.bird.angle < 20)
+            this.bird.angle += 1;
+
         if (this.key_jump.isDown) {
             this.bird.setVelocityY(-gameOptions.playerJump);
+            this.jump_sound.play();
+            let tween = this.tweens.add({
+                targets: [ this.bird ],
+                angle: -30,
+                duration: 200
+            });
+            this.key_jump.isDown = false;
         }
 
         if (this.bird.y < 0 || this.bird.y > 600) {
@@ -81,6 +93,7 @@ class GameScene extends Phaser.Scene {
             window.location = '../../index.php';
         }
     }
+
 
     restartGame() {
         //this.scene.start('game');
