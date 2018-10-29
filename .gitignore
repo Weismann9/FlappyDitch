@@ -13,5 +13,6 @@ codeception.*
 error.log
 custom.log
 
-php/db_config.php
+# db configuration
+src/config/db_config.php
 db_config.php

@@ -6,9 +6,9 @@
  * Time: 8:25 PM
  */
 
-require_once 'db_config.php';
+require_once 'config/db_config.php';
+require_once 'config/app_config.php';
 
-const APP_NAME='FlappyDitch';
 // Create connection
 $db = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 // Check connection

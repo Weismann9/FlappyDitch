@@ -51,11 +51,6 @@ header > a:hover {
     transition: .35s;
 }
 
-/* Hide a DOM container, which is used for JS/PHP interaction */
-#user-data{
-    display: none;
-}
-
 .char-preview{
     height: 100px;
     width: 100px;

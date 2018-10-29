@@ -1,3 +1,5 @@
+// TODO: Update assets source after structure refactoring
+
 class User {
     constructor(id, name, bestScore, skin) {
         this.id = id;
@@ -27,9 +29,9 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('sky', 'assets/sky.png');
-        this.load.image('bird', `assets/characters/${this.userSkin}.png`);
-        this.load.image('pipe', 'assets/pipe.png');
+        this.load.image('sky', 'assets/media/sky.png');
+        this.load.image('bird', `assets/media/characters/${this.userSkin}.png`);
+        this.load.image('pipe', 'assets/media/pipe.png');
     }
 
     create() {
@@ -76,7 +78,7 @@ class GameScene extends Phaser.Scene {
         }
 
         if (this.key_esc.isDown) {
-            window.location = 'index.php';
+            window.location = '../../index.php';
         }
     }
 
@@ -114,12 +116,13 @@ class GameScene extends Phaser.Scene {
                 userId = this.user.id;
             $.ajax({
                 type: "POST",
-                url: "php/save_score.php",
+                url: "src/save_score.php",
                 data: {
                     userId: userId,
                     bestScore: score,
                 },
                 success: function () {
+
                     console.log(`Score: ${score}, User(id): ${userId}, Saved!`);
                 }
             });
