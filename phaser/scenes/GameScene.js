@@ -1,5 +1,3 @@
-// TODO: Update assets source after structure refactoring
-
 class User {
     constructor(id, name, bestScore, skin) {
         this.id = id;
@@ -32,11 +30,13 @@ class GameScene extends Phaser.Scene {
         this.load.image('sky', 'assets/media/sky.png');
         this.load.image('bird', `assets/media/characters/${this.userSkin}.png`);
         this.load.image('pipe', 'assets/media/pipe.png');
+        this.load.image('pipe_top_edge', 'assets/media/pipe_top_edge.png');
+        this.load.image('pipe_bottom_edge', 'assets/media/pipe_bottom_edge.png');
     }
 
     create() {
-        this.add.image(400, 300, 'sky');
-        this.bird = this.physics.add.image(game.config.width / 2, game.config.height / 2, 'bird');
+        this.add.image(this.game.config.width / 2, this.game.config.height / 2, 'sky');
+        this.bird = this.physics.add.image(this.game.config.width / 2, this.game.config.height / 2, 'bird');
         this.bird.body.gravity.y = gameOptions.playerGravity;
 
         this.key_esc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
@@ -90,8 +90,8 @@ class GameScene extends Phaser.Scene {
         document.location.reload(false);
     }
 
-    addOnePipe(x, y) {
-        this.pipe = this.physics.add.image(x, y, 'pipe');
+    addOnePipe(x, y, image_key) {
+        this.pipe = this.physics.add.image(x, y, image_key);
         this.pipe.setVelocityX(-200);
         this.pipe.checkWorldBounds = true;
         this.pipe.outOfBoundsKill = true;
@@ -101,10 +101,22 @@ class GameScene extends Phaser.Scene {
 
     addRowOfPipes() {
         this.labelScore.text = `Score: ${this.score}`;
-        let hole = Math.floor(Math.random() * 5) + 1;
-        for (let i = 0; i < 9; i++) {
-            if (i !== hole && i !== hole + 1) {
-                this.addOnePipe(800, i * 60 + 50);
+        let pipe_type;
+        let among_of_pipes = this.game.config.height / 50;
+        let hole = Math.floor(Math.random() * among_of_pipes / 2) + 1;
+        for (let i = 0; i < among_of_pipes; i++) {
+            if (i !== hole - 1 && i !== hole && i !== hole + 1) {
+                switch (i) {
+                    case hole - 2:
+                        pipe_type = 'pipe_top_edge';
+                        break;
+                    case hole + 2:
+                        pipe_type = 'pipe_bottom_edge';
+                        break;
+                    default:
+                        pipe_type = 'pipe';
+                }
+                this.addOnePipe(this.game.config.width, i * 50 + 25, pipe_type);
             }
         }
         this.score += 1;
@@ -122,7 +134,6 @@ class GameScene extends Phaser.Scene {
                     bestScore: score,
                 },
                 success: function () {
-
                     console.log(`Score: ${score}, User(id): ${userId}, Saved!`);
                 }
             });
