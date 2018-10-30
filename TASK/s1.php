@@ -7,3 +7,4 @@
  */
 
 $slavik = 'PeaceOS';
+$chetosdelal = null;
