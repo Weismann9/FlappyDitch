@@ -2,7 +2,8 @@
 A silly project which implements a flappy game.
 
 ### Project structure
-
+*Note that project is written on PHP 7.2, older versions may not work properly.*\
+*JS scripts are written on ES6*
 - / — web-pages
 - /assets — project assets
 - /vendors — javaScript libraries
